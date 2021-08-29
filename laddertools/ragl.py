@@ -75,6 +75,7 @@ class _OutCome:
         self._p1_selected_faction = result.player1.selected_faction
         self._map_uid = result.map_uid
         self._map_title = result.map_title
+        self._version = result.version
 
     @staticmethod
     def _sql_date_fmt(dt):
@@ -99,6 +100,7 @@ class _OutCome:
             self._p1_selected_faction,
             self._map_uid,
             self._map_title,
+            self._version,
         )
 
 

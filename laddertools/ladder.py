@@ -123,6 +123,7 @@ class _OutCome:
         self._p1_selected_faction = result.player1.selected_faction
         self._map_uid = result.map_uid
         self._map_title = result.map_title
+        self._version = result.version
 
     @staticmethod
     def _sql_date_fmt(dt):
@@ -147,6 +148,7 @@ class _OutCome:
             self._p1_selected_faction,
             self._map_uid,
             self._map_title,
+            self._version,
         )
 
 
@@ -236,7 +238,7 @@ def _main(args):
 
     c.executemany("INSERT OR IGNORE INTO accounts VALUES (?,?,?,?)", accounts_sql)
     c.executemany("INSERT OR IGNORE INTO players VALUES (?,?,?,?,?,?,?,?)", players_sql)
-    c.executemany("INSERT OR IGNORE INTO outcomes VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", outcomes_sql)
+    c.executemany("INSERT OR IGNORE INTO outcomes VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", outcomes_sql)
 
     conn.commit()
     conn.close()

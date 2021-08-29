@@ -32,5 +32,6 @@ CREATE TABLE IF NOT EXISTS outcomes (
 	selected_faction_0    TEXT NOT NULL,
 	selected_faction_1    TEXT NOT NULL,
 	map_uid               TEXT NOT NULL,
-	map_title             TEXT NOT NULL
+	map_title             TEXT NOT NULL,
+    version               TEXT NOT NULL
 );

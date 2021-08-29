@@ -38,7 +38,8 @@ class GamePlayerInfo:
 
 
 class GameResult:
-    def __init__(self, start_time, end_time, filename, player0, player1, map_uid, map_title):
+
+    def __init__(self, start_time, end_time, filename, player0, player1, map_uid, map_title, version):
         self.start_time = start_time
         self.end_time = end_time
         self.filename = op.abspath(filename)
@@ -46,6 +47,7 @@ class GameResult:
         self.player1 = player1
         self.map_uid = map_uid
         self.map_title = map_title
+        self.version = version
 
     def __str__(self):
         return f"{self.filename}: {self.player0} wins vs {self.player1}"
@@ -94,6 +96,7 @@ def get_result(filename):
         end_time = _parse_date_fmt(root_info["EndTimeUtc"])
         map_uid = root_info["MapUid"]
         map_title = root_info["MapTitle"]
+        version = root_info["Version"]
 
         players = [k for k in game_info.keys() if k.startswith("Player@")]
         if len(players) != 2:
@@ -173,7 +176,7 @@ def get_result(filename):
             else:
                 raise Exception(f"players disconnected at the same time ({p0_disconnect}), draw")
 
-        return GameResult(start_time, end_time, filename, p0, p1, map_uid, map_title)
+        return GameResult(start_time, end_time, filename, p0, p1, map_uid, map_title, version)
 
 
 def _log_result(filename):
