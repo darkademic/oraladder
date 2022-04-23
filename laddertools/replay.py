@@ -115,6 +115,10 @@ def get_result(filename):
             int(player1.get("Handicap", 0)),
         )
 
+        # Manually added fingerprint for specific replay where player not logged in
+        if 'ca-Server-2022-04-10T195920Z.orarep' in filename:
+            p1_fingerprint = 'd2a712629c5d89652e9ed8a98931bd8cc0707113'
+
         if p0_handicap or p1_handicap:
             raise Exception(f"Handicap matchups are not allowed ({p0_name}:{p0_handicap}, {p1_name}:{p1_handicap})")
 
@@ -175,6 +179,14 @@ def get_result(filename):
                 p1 = pA
             else:
                 raise Exception(f"players disconnected at the same time ({p0_disconnect}), draw")
+
+        # Manually added results where winner/loser are backwards due to accidental surrender etc.
+        backward_results = ['ca-Server-2022-04-22T191131Z.orarep']
+
+        if any(substring in filename for substring in backward_results):
+            p0_old = p0
+            p0 = p1
+            p1 = p0_old
 
         return GameResult(start_time, end_time, filename, p0, p1, map_uid, map_title, version)
 
